@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Push to Docker Registry') {
       steps {
-        echo 'we will push the image to registry rummy-server-${TAG_NAME}'
+        echo 'we will push the image '
         sh """
           echo "getting"
         """
