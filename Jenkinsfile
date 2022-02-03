@@ -1,8 +1,8 @@
 pipeline {
   agent any
   environment {
-    PRE_PROD_BRANCH = /^release\/.*/
-    STAGING_BRANCH = "integration"
+    PRE_PROD_BRANCH = "integration"
+    STAGING_BRANCH = "main"
     BUILD_ENV = """${	
       BRANCH_NAME ==~ PRE_PROD_BRANCH ? 'Dev' : 	
       BRANCH_NAME == STAGING_BRANCH ? 'QA' : 'Dev'	
