@@ -14,8 +14,6 @@ pipeline {
         echo "The branch: ${BRANCH_NAME} and the build ${BUILD_NUMBER}"
         sh """
           sudo docker build --build-arg BUILD_ENV=${BUILD_ENV}  -t rummy-server .
-          sudo docker tag rummy-server registry-server:8083/rummy-server-${TAG_NAME}:latest
-          sudo docker tag rummy-server registry-server:8083/rummy-server-${TAG_NAME}:${BUILD_NUMBER}
         """
       }
     }
@@ -23,15 +21,14 @@ pipeline {
       steps {
         echo 'we will push the image to registry rummy-server-${TAG_NAME}'
         sh """
-          sudo docker push registry-server:8083/rummy-server-${TAG_NAME}:latest
-          sudo docker push registry-server:8083/rummy-server-${TAG_NAME}:${BUILD_NUMBER}
+          echo "getting"
         """
       }
     }
     stage('Deploy') {
       steps {
         sh """
-          sudo ansible-playbook ansible.yml --extra-vars "deployment_host=${INVENTORY_NAME} tag_name=${TAG_NAME}"
+          echo "ok"
         """
       }
     }
